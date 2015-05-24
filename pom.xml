@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.toronto.cs.se.si</groupId>
+  <artifactId>recovering</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+  
+  	<dependency>	
+  		<groupId>edu.toronto.cs.se.ci</groupId>
+  		<artifactId>ci</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  		
+  	<dependency>
+  		<groupId>edu.toronto.cs.se.ci</groupId>
+  		<artifactId>playground</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  
+	<dependency>
+		<groupId>com.google.apis</groupId>
+      	<artifactId>google-api-services-customsearch</artifactId>
+      	<version>v1-rev46-1.20.0</version>
+    </dependency>
+  
+  </dependencies>
+  
+</project>
