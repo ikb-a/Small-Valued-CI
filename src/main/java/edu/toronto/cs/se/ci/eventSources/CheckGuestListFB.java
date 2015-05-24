@@ -5,7 +5,6 @@ import java.util.Random;
 
 import com.google.common.base.Optional;
 
-import edu.toronto.cs.se.ci.UnknownException;
 import edu.toronto.cs.se.ci.budget.Expenditure;
 import edu.toronto.cs.se.ci.eventObjects.Event;
 import edu.toronto.cs.se.ci.sources.FaceBookProfileCheck;
@@ -50,33 +49,44 @@ public class CheckGuestListFB extends EventSource {
 	}
 	
 	@Override
-	public Integer getResponse(Event e) throws UnknownException {
+	public Integer getResponse(Event e) {
 		
-		ArrayList<String> names = e.getGuestNames();
+		try{
+			
+			//get a random sampling of the guest list
+			ArrayList<String> names = e.getGuestNames();
+			ArrayList<String> subset = randomSample(names);
 		
-		//get a random sampling of the guest list
-		ArrayList<String> subset = randomSample(names);
-		
-		//verify facebook profiles
-		int numVerified = 0;
-		int numUnknown = 0;
-		int result;
-		for (int i = 0; i < subset.size(); i++){
-			result = facebook.getResponse(subset.get(i));
-			if (result == 1){
-				numVerified++;
+			//verify facebook profiles
+			int numVerified = 0;
+			int numUnknown = 0;
+			int result;
+			for (int i = 0; i < subset.size(); i++){
+				result = facebook.getResponse(subset.get(i));
+				if (result == 1){
+					numVerified++;
+				}
+				else if (result == -1){
+					numUnknown++;
+				}
 			}
-			else if (result == -1){
-				numUnknown++;
+		
+			//check if there were too many unknown results
+			if (numUnknown > unknownAllowance * names.size()){
+				return -1;
 			}
+			//check if there were enough positive results
+			else if (numVerified < successThreshold * names.size()){
+				return 1;
+			}
+			else{
+				return 0;
+			}
+			
 		}
-		
-		//check if the results passed the success thresholds
-		/*
-		 * TODO
-		 */
-		
-		return -1;
+		catch (Exception ex){
+			return -1;
+		}
 	}
 
 	/**
