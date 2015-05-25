@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import weka.core.Attribute;
+import weka.core.FastVector;
+import weka.core.Instance;
+import weka.core.Instances;
 import edu.toronto.cs.se.ci.eventSources.EventSource;
 import edu.toronto.cs.se.ci.eventObjects.*;
 
@@ -14,19 +18,22 @@ import edu.toronto.cs.se.ci.eventObjects.*;
  * @author wginsberg
  *
  */
-public class EventSourceInvoker {
+public class EventSourceInvoker implements Invoker<EventSource, Event, Integer> {
 
 	private ArrayList<EventSource> sources;
 	private ArrayList<Event> events;
 	
-	private int [][] results;
+	private Integer[][] results;
+	
+	public String name = "EventSourceInvoker";
 	
 	/**
 	 * Create a new EventSourceInvoker with no initial
 	 * sources or events.
 	 */
-	public EventSourceInvoker(){
+	public EventSourceInvoker(String name){
 		sources = new ArrayList<EventSource>();
+		this.name = name;
 	}
 	
 	/**
@@ -34,7 +41,8 @@ public class EventSourceInvoker {
 	 * @param sources - possibly null collection of event sources
 	 * @param events - possibly null collection of events
 	 */
-	public EventSourceInvoker(Collection<EventSource> sources, Collection<Event> events){
+	public EventSourceInvoker(String name, List<EventSource> sources, List<Event> events){
+		this.name = name;
 		if (sources != null){
 			this.sources = (ArrayList<EventSource>) sources;
 		}
@@ -57,7 +65,7 @@ public class EventSourceInvoker {
 	public void invoke(List<EventSource> sources, List<Event> events){
 		
 		//create a 2d array or results where rows are events and columns are sources 
-		results = new int [events.size()][sources.size()];
+		results = new Integer [events.size()][sources.size()];
 		
 		//invoke the sources on each event
 		for (int i = 0; i < events.size(); i++){
@@ -70,9 +78,9 @@ public class EventSourceInvoker {
 	 * Invoke sources on a single event
 	 * @param e - Event object
 	 */
-	public int [] invoke(List<EventSource> sources, Event e){
+	public Integer [] invoke(List<EventSource> sources, Event e){
 		
-		int [] sourceResponses = new int [sources.size()];
+		Integer [] sourceResponses = new Integer [sources.size()];
 		for (int i = 0; i < sourceResponses.length; i++){
 			try{
 				sourceResponses[i] = sources.get(i).getResponse(e);
@@ -89,13 +97,13 @@ public class EventSourceInvoker {
 	 * Invoke sources on a single event with pre-set sources
 	 * @param e - Event object
 	 */
-	public int [] invoke(Event e){
+	public Integer [] invoke(Event e){
 		
 		return invoke(sources, e);
 		
 	}
 	
-	public int [][] getResults(){
+	public Integer [][] getResults(){
 		return results;
 	}
 	
@@ -132,6 +140,37 @@ public class EventSourceInvoker {
 		}
 		
 		return sb.toString();
+		
+	}
+
+
+	public Instances getResultInstances() throws Exception {
+		
+		if (sources == null || events == null){
+			throw new Exception("Null fields in invoker");
+		}
+		
+		//set the attributes for the instances
+		FastVector attributes = new FastVector(sources.size());
+		for (int i = 0; i < sources.size(); i++){
+			String attributeName = sources.get(i).getName();
+			attributes.setElementAt(new Attribute(attributeName), i);
+		}
+		//create the instances object
+		Instances instances = new Instances(name, attributes, events.size());
+		
+		//convert the results into instances
+		Integer [][] results = getResults();
+		for (int i = 0; i < events.size(); i++){
+			Instance instance = new Instance(sources.size());
+			instance.setDataset(instances);
+			for (int j = 0; j < sources.size(); j++){
+				instance.setValue(j, results[i][j]);
+			}
+			instances.add(instance);
+		}
+		
+		return instances;
 		
 	}
 	

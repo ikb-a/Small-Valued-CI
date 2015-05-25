@@ -1,8 +1,13 @@
 package edu.toronto.cs.se.ci.mains;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
+import weka.core.Instances;
+import weka.core.converters.ArffSaver;
 import edu.toronto.cs.se.ci.invokers.EventSourceInvoker;
 import edu.toronto.cs.se.ci.playground.data.Address;
 import edu.toronto.cs.se.ci.eventObjects.BasicEvent;
@@ -15,7 +20,7 @@ import edu.toronto.cs.se.ci.eventSources.GoogleMapsVenueAddress;
 
 public class invocation {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		//make some events
 		Address a1 = new Address("40", "St George Street", "Toronto", "Ontario", "Canada", "M5S 2E4");
@@ -45,10 +50,31 @@ public class invocation {
 		sources.add(new CheckGuestListNonFictional());
 		
 		//do the invocation
-		EventSourceInvoker invoker = new EventSourceInvoker(sources, null);
+		EventSourceInvoker invoker = new EventSourceInvoker("Plausible Event", sources, events);
 		invoker.invoke(sources, events);
 		
+		//print out the results for debugging
 		System.out.println(invoker.getFormattedResults());
+		
+		//save the results in arff
+		Instances ins = invoker.getResultInstances();
+		
+		BufferedWriter writer = new BufferedWriter(new FileWriter("./data/test.arff"));
+		writer.write(ins.toString());
+		writer.close();
+		
+		/*
+		ArffSaver saver = new ArffSaver();
+		saver.setFile(new File("./data/test.arff"));
+		saver.setInstances(ins);
+		try {
+			saver.writeBatch();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		*/
+		
 	}
 
 }
