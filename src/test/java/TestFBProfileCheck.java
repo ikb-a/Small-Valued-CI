@@ -22,7 +22,8 @@ public class TestFBProfileCheck {
 		for (int i = 0; i < names.length; i++){
 			int result;
 			result = fb.getResponse(names[i]);
-			assertNotEquals(result, 0);
+			//assertNotEquals(result, 0);
+			assertFalse(result == 0);
 		}
 		
 	}

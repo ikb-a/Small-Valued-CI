@@ -38,13 +38,15 @@ public class CheckGuestListFB extends EventSource {
 	 */
 	public double unknownAllowance = 0.33;
 	
-	private Random random;
+	private static Random random;
 	
 	private FaceBookProfileCheck facebook;
 	
 	public CheckGuestListFB(){
 		
-		random = new Random();
+		if (random == null){
+			random = new Random();
+		}
 		facebook = new FaceBookProfileCheck();
 	}
 	
@@ -55,7 +57,7 @@ public class CheckGuestListFB extends EventSource {
 			
 			//get a random sampling of the guest list
 			ArrayList<String> names = e.getGuestNames();
-			ArrayList<String> subset = randomSample(names);
+			ArrayList<String> subset = randomSample(names, maxGuestsToCheck, maxGuestsToCheck, ratioGuestsToCheck);
 		
 			//verify facebook profiles
 			int numVerified = 0;
@@ -95,7 +97,7 @@ public class CheckGuestListFB extends EventSource {
 	 * @param guestList
 	 * @return
 	 */
-	private ArrayList<String> randomSample(ArrayList<String> guestList){
+	public static ArrayList<String> randomSample(ArrayList<String> guestList, int minGuestsToCheck, int maxGuestsToCheck, double ratioGuestsToCheck){
 		
 		/*
 		 * Calculate the size of the random subset
