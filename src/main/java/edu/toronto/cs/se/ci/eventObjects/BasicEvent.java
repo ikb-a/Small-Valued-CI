@@ -1,6 +1,7 @@
 package edu.toronto.cs.se.ci.eventObjects;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class BasicEvent implements Event {
 
@@ -10,6 +11,12 @@ public class BasicEvent implements Event {
 	
 	public BasicEvent(){
 		guests = new ArrayList<String>();
+	}
+	
+	public BasicEvent(Venue venue, Collection<String> guestlist, String organizer){
+		this.venue = venue;
+		this.guests = (ArrayList<String>) guestlist;
+		this.organizer = organizer;
 	}
 	
 	public void setVenue(Venue v){
