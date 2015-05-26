@@ -44,6 +44,11 @@ public class CheckGuestListNonFictional extends EventSource {
 	}
 	
 	@Override
+	public String getName(){
+		return "Guests not fictional (Wikipedia)";
+	}
+	
+	@Override
 	public Integer getResponse(Event e) {
 		
 		try {

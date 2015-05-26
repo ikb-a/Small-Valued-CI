@@ -1,13 +1,8 @@
 package edu.toronto.cs.se.ci.mains;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import weka.core.Instances;
-import weka.core.converters.ArffSaver;
 import edu.toronto.cs.se.ci.invokers.EventSourceInvoker;
 import edu.toronto.cs.se.ci.playground.data.Address;
 import edu.toronto.cs.se.ci.eventObjects.BasicEvent;
@@ -56,25 +51,13 @@ public class invocation {
 		//print out the results for debugging
 		System.out.println(invoker.getFormattedResults());
 		
-		//save the results in arff
-		Instances ins = invoker.getResultInstances();
-		
-		BufferedWriter writer = new BufferedWriter(new FileWriter("./data/test.arff"));
-		writer.write(ins.toString());
-		writer.close();
-		
-		/*
-		ArffSaver saver = new ArffSaver();
-		saver.setFile(new File("./data/test.arff"));
-		saver.setInstances(ins);
-		try {
-			saver.writeBatch();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		*/
-		
+		//save the results to a file
+		File outFile = new File("./data/test.arff");
+		invoker.saveToArff(outFile,
+				"Data was generated programmatically with an adhoc main function\n"
+				+ "edu.toronto.cs.se.ci.invokers.EventSourceInvoker.java\n"
+				+ "This type of data should eventually be changed to support a classifying attribute");
+		System.out.println("Saved to " + outFile.getAbsolutePath());
 	}
 
 }

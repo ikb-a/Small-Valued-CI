@@ -18,14 +18,12 @@ import edu.toronto.cs.se.ci.eventObjects.*;
  * @author wginsberg
  *
  */
-public class EventSourceInvoker implements Invoker<EventSource, Event, Integer> {
+public class EventSourceInvoker extends Invoker<EventSource, Event, Integer> {
 
 	private ArrayList<EventSource> sources;
 	private ArrayList<Event> events;
 	
 	private Integer[][] results;
-	
-	public String name = "EventSourceInvoker";
 	
 	/**
 	 * Create a new EventSourceInvoker with no initial
@@ -33,7 +31,7 @@ public class EventSourceInvoker implements Invoker<EventSource, Event, Integer> 
 	 */
 	public EventSourceInvoker(String name){
 		sources = new ArrayList<EventSource>();
-		this.name = name;
+		setName(name);
 	}
 	
 	/**
@@ -42,7 +40,7 @@ public class EventSourceInvoker implements Invoker<EventSource, Event, Integer> 
 	 * @param events - possibly null collection of events
 	 */
 	public EventSourceInvoker(String name, List<EventSource> sources, List<Event> events){
-		this.name = name;
+		setName(name);
 		if (sources != null){
 			this.sources = (ArrayList<EventSource>) sources;
 		}
@@ -115,6 +113,14 @@ public class EventSourceInvoker implements Invoker<EventSource, Event, Integer> 
 		return sources.remove(source);
 	}
 	
+	public int numSources(){
+		return sources.size();
+	}
+	
+	public EventSource getSource(int i){
+		return sources.get(i);
+	}
+	
 	public void setEvents(Collection<Event> events){
 		this.events = (ArrayList<Event>) events;
 	}
@@ -142,8 +148,7 @@ public class EventSourceInvoker implements Invoker<EventSource, Event, Integer> 
 		return sb.toString();
 		
 	}
-
-
+	
 	public Instances getResultInstances() throws Exception {
 		
 		if (sources == null || events == null){
@@ -172,6 +177,19 @@ public class EventSourceInvoker implements Invoker<EventSource, Event, Integer> 
 		
 		return instances;
 		
+	}
+
+
+	/**
+	 * Returns the string "{-1, 0, 1}"
+	 */
+	@Override
+	protected String getSourceArffType() {
+		/*
+		 * We are using a ternary opinion system
+		 * where True, False, Unknown are 1, 0, -1, respectively
+		 */
+		return "{-1, 0, 1}";
 	}
 	
 }

@@ -51,6 +51,11 @@ public class CheckGuestListFB extends EventSource {
 	}
 	
 	@Override
+	public String getName(){
+		return "Guests exist (FB)";
+	}
+	
+	@Override
 	public Integer getResponse(Event e) {
 		
 		try{

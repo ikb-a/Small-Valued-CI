@@ -18,6 +18,11 @@ public class GoogleMapsVenueAddress extends EventSource {
 	public GoogleMapsVenueAddress() {
 		googleMaps = new GMapsEstablishmentHasAddress();
 	}
+
+	@Override
+	public String getName(){
+		return "Venue address cross validated (GMaps + GPlaces)";
+	}
 	
 	@Override
 	public Integer getResponse(Event e){

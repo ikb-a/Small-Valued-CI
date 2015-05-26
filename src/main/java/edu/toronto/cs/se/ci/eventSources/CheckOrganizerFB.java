@@ -13,6 +13,11 @@ public class CheckOrganizerFB extends EventSource {
 	public CheckOrganizerFB(){
 		facebook = new FaceBookProfileCheck();
 	}
+
+	@Override
+	public String getName(){
+		return "Organizer exists (FB)";
+	}
 	
 	@Override
 	public Integer getResponse(Event e) {
