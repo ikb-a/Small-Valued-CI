@@ -24,6 +24,18 @@
       	<version>v1-rev46-1.20.0</version>
     </dependency>
   
-  </dependencies>
+	<dependency>
+		<groupId>nz.ac.waikato.cms.weka</groupId>
+		<artifactId>weka-stable</artifactId>
+		<version>3.6.12</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.javadocmd</groupId>
+		<artifactId>simplelatlng</artifactId>
+		<version>RELEASE</version>
+	</dependency>
+
+</dependencies>
   
 </project>
