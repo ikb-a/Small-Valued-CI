@@ -46,7 +46,7 @@ public class FaceBookProfileCheck extends BasicSource<String, Integer, Void> {
 		
 		//try to get the results out of the json
 		try{
-			results = json.getJSONObject("responseData").getJSONArray("results");
+			results = json.getJSONArray("items");
 		}
 		catch (Exception e){
 			return -1;
@@ -56,8 +56,8 @@ public class FaceBookProfileCheck extends BasicSource<String, Integer, Void> {
 		//check the search results
 		for (int i = 0; i < Math.min(numResultsToCheck, results.length()); i++){
 			JSONObject result = results.getJSONObject(i);
-			String title = result.getString("titleNoFormatting");
-			String content = result.getString("content");
+			String title = result.getString("title");
+			String content = result.getString("snippet");
 			/*
 			 * Check that the page title is the Facebook profile we are seeking
 			 * It could either be "<Name> | Facebook" or "<Name> Profiles | Facebook",

@@ -45,7 +45,7 @@ public class NearbySearch extends BasicSource<List<Double>, JSONObject, Void> {
 		this.searchKey = searchFor;
 		
 		if (API_KEY == null){
-			API_KEY = System.getenv("GOOGLEPLACES_KEY");
+			API_KEY = System.getenv("GOOGLE_API_KEY");
 		}
 	}
 

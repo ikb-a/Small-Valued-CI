@@ -1,4 +1,4 @@
-% Generated at 1:05 PM on Wed, May 27, 2015
+% Generated at 4:51 PM on Wed, May 27, 2015
 
 % Real events : ./data/real_events.json
 % Fake events : ./data/fake_events.json
@@ -13,6 +13,6 @@
 
 @data
 0,-1,0,-1,-1
-0,-1,0,0,-1
+0,-1,0,-1,-1
 1,-1,0,-1,-1
 1,-1,0,-1,-1
