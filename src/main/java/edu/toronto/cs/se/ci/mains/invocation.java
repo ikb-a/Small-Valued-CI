@@ -29,9 +29,9 @@ public class invocation {
 		Address a2 = new Address("51", "Baldwin St", "Toronto", "ON", "Canada", "M5T 1L1");
 		Venue v2 = new Venue("Kinton Ramen", a2, null);
 		ArrayList<String> guests2 = new ArrayList<String>(3);
-		guests1.add("Taylor Stinson");
-		guests1.add("Carina Conceicao");
-		guests1.add("Sharon Fong");
+		guests2.add("Taylor Stinson");
+		guests2.add("Carina Conceicao");
+		guests2.add("Sharon Fong");
 		Event e2 = new BasicEvent(v2, guests2, null);
 		
 		ArrayList<Event> events = new ArrayList<Event>(2);

@@ -2,11 +2,11 @@ package edu.toronto.cs.se.ci.eventObjects;
 
 import java.util.ArrayList;
 
-public interface Event {
+public abstract class Event {
 
-	public ArrayList<String> getGuestNames();
+	abstract public ArrayList<String> getGuestNames();
 	
-	public Venue getVenue();
+	abstract public Venue getVenue();
 
-	public String getOrganizerName();
+	abstract public String getOrganizerName();
 }

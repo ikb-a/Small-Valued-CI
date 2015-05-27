@@ -102,17 +102,26 @@ public class CheckGuestListFB extends EventSource {
 	 * @param guestList
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static ArrayList<String> randomSample(ArrayList<String> guestList, int minGuestsToCheck, int maxGuestsToCheck, double ratioGuestsToCheck){
+		
+		//copy the guest list
+		guestList = (ArrayList<String>) guestList.clone();
 		
 		/*
 		 * Calculate the size of the random subset
 		 */
 		int sampleSize = (int) ratioGuestsToCheck * guestList.size();
+		//within the min and max range specified
 		if (sampleSize < minGuestsToCheck){
 			sampleSize = minGuestsToCheck;
 		}
 		else if (sampleSize > maxGuestsToCheck){
 			sampleSize = maxGuestsToCheck;
+		}
+		//not more than the size of the list
+		if (sampleSize > guestList.size()){
+			sampleSize = guestList.size();
 		}
 		
 		/*
