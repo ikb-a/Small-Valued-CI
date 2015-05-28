@@ -39,13 +39,22 @@ public class ClassifyingSource extends EventSource {
 	 * Return the event's classification, or -1 if it is unknown
 	 */
 	@Override
-	public Integer getResponse(Event input) {
+	public Integer getResponseOnline(Event input) {
 		if (classification.containsKey(input)){
 			return classification.get(input);
 		}
 		return -1;
 	}
 
+	/**
+	 * Since this is a source for classifying events, we use the
+	 * same response as if we were online. 
+	 */
+	@Override
+	public Integer getResponseOffline(Event e){
+		return getResponseOnline(e);
+	}
+	
 	@Override
 	public String getName(){
 		return name;

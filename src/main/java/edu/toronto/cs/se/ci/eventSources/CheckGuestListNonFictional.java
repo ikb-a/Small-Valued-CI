@@ -49,7 +49,7 @@ public class CheckGuestListNonFictional extends EventSource {
 	}
 	
 	@Override
-	public Integer getResponse(Event e) {
+	public Integer getResponseOnline(Event e) {
 		
 		try {
 			//take a random sample of the guestlist

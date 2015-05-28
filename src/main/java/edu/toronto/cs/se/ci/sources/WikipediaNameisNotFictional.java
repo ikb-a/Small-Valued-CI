@@ -21,17 +21,17 @@ public class WikipediaNameisNotFictional extends BasicSource<String, Integer, Vo
 		try {
 			//get the search results
 			JSONObject json = GoogleSearchJSON.search(input + " Wikipedia");
-			JSONArray results = json.getJSONObject("responseData").getJSONArray("results");
+			JSONArray results = json.getJSONArray("items");
 			
 			//check results
 			int numToCheck = Math.min(maxResultsToCheck, results.length());
 			for (int i = 0; i < numToCheck; i++){
 				JSONObject result = results.getJSONObject(i);
 				//check if the result is a wikipedia page
-				String title = result.getString("titleNoFormatting");
+				String title = result.getString("title");
 				if (title.equals(input + resultTitleSuffix)){
 					//check if the page is for a fictional character
-					String content = result.getString("content");
+					String content = result.getString("snippet");
 					if (isDescriptionOfFictionalCharacter(content)){
 						//return false because the page is not for a not fictional person
 						return 0;

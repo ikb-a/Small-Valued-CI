@@ -9,4 +9,10 @@ public abstract class Event {
 	abstract public Venue getVenue();
 
 	abstract public String getOrganizerName();
+	
+	abstract public String getTitle();
+	
+	public String getID(){
+		return getTitle();
+	}
 }

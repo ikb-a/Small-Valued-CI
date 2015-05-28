@@ -14,6 +14,10 @@ import edu.toronto.cs.se.ci.eventSources.EventSource;
 import edu.toronto.cs.se.ci.eventSources.GoogleMapsVenueAddress;
 import edu.toronto.cs.se.ci.invokers.EventSourceInvoker;
 
+/**
+ * Demo of loading events from a file, invoking sources on
+ * them, and saving the results to a file.
+ */
 public class demo {
 
 	static private String fileRealEvents = "./data/real_events.json";
@@ -70,6 +74,11 @@ public class demo {
 		//invoke the sources
 		EventSourceInvoker invoker = new EventSourceInvoker("Event Plausibility", sources, events);
 		invoker.invoke();
+		
+		//close sources to save their cache
+		for (int i = 0; i < sources.size(); i++){
+			sources.get(i).close();
+		}	
 		
 		//save to a file
 		try{

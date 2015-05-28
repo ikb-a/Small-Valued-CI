@@ -20,7 +20,7 @@ public class CheckOrganizerFB extends EventSource {
 	}
 	
 	@Override
-	public Integer getResponse(Event e) {
+	public Integer getResponseOnline(Event e) {
 		try{
 			facebook.allowNonPeople = false;
 			return facebook.getResponse(e.getOrganizerName());

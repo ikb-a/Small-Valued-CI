@@ -25,7 +25,7 @@ public class GoogleMapsVenueAddress extends EventSource {
 	}
 	
 	@Override
-	public Integer getResponse(Event e){
+	public Integer getResponseOnline(Event e){
 		
 		try{
 			return googleMaps.getResponse(e.getVenue());
