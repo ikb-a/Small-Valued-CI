@@ -1,4 +1,4 @@
-% Generated at 12:22 PM on Thu, May 28, 2015
+% Generated at 12:29 PM on Thu, May 28, 2015
 
 % Real events : ./data/real_events.json
 % Fake events : ./data/fake_events.json
@@ -12,7 +12,7 @@
 @attribute Guests-not-fictional-(Wikipedia) {-1, 0, 1}
 
 @data
--1,-1,-1,-1,-1
--1,-1,-1,-1,-1
--1,1,0,0,-1
--1,1,0,1,-1
+0,1,0,0,1
+0,1,0,0,1
+1,1,0,1,1
+1,1,0,1,1
