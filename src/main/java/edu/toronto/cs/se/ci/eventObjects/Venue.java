@@ -17,6 +17,10 @@ public class Venue {
 		this.address = address;
 	}
 
+	public void setName(String name){
+		this.name = name;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -25,6 +29,10 @@ public class Venue {
 		return address;
 	}
 
+	public void setAddress(Address a){
+		address = a;
+	}
+	
 	public String getTruncatedAddress(){
 		if (address.getStreetNumber() != null && address.getRoute() != null){
 			return address.getStreetNumber() + ", " + address.getRoute();

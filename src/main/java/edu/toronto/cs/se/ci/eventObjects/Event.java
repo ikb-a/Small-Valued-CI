@@ -152,4 +152,25 @@ public class Event {
 	public Venue getVenue(){
 		return venue;
 	}
+	public void setVenue(Venue v){
+		venue = v;
+	}
+	public void setTime(EventTime t){
+		time = t;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setOrganizer(EventOrganizer o) {
+		organizer = o;
+	}
 }

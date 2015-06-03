@@ -41,4 +41,28 @@ public class EventContact {
 	public String getPhoneNumber(){
 		return phone;
 	}
+
+	public void setTwitterHandle(String twitter_handle) {
+		this.twitter_handle = twitter_handle;
+	}
+
+	public void setTwitterUrl(String twitter_url) {
+		this.twitter_url = twitter_url;
+	}
+
+	public void setFacebookUrl(String facebook_url) {
+		this.facebook_url = facebook_url;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }

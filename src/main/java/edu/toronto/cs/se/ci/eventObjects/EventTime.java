@@ -6,7 +6,6 @@ import java.util.Date;
 
 /**
  * A class for storing the dates and times for the start and end of an event.
- * There must be a start date set for the methods to work properly.
  * If any of start time, end time, or end date are not set then they may be given
  * default values.
  * @author wginsberg
@@ -15,7 +14,7 @@ import java.util.Date;
 public class EventTime {
 	
 	//raw strings to set when loading from Json with Gson
-	private String start_date = "";
+	private String start_date = "00/00/000";
 	private String start_time = "";
 	private String end_date = "";
 	private String end_time = "";
@@ -85,6 +84,14 @@ public class EventTime {
 			}
 		}
 		return endDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	
 }

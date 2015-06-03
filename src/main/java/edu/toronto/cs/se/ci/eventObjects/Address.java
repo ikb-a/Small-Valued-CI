@@ -9,6 +9,15 @@ public class Address {
 	private String country;
 	private String postal_code;
 	
+	public Address(){
+		street_number = "";
+		route = "";
+		locality = "";
+		administrative_area_level_1 = "";
+		country = "";
+		postal_code = "";
+	}
+	
 	public Address(String streetNumber, String route, String city,
 			String provence, String country, String postalCode) {
 		this.street_number = streetNumber;
@@ -51,5 +60,29 @@ public class Address {
 
 	public String getPostalCode() {
 		return postal_code;
+	}
+
+	public void setStreetNumber(String street_number) {
+		this.street_number = street_number;
+	}
+
+	public void setRoute(String route) {
+		this.route = route;
+	}
+
+	public void setCity(String city) {
+		this.locality = city;
+	}
+
+	public void setProvince(String province) {
+		this.administrative_area_level_1 = province;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public void setPostalCode(String postal_code) {
+		this.postal_code = postal_code;
 	}
 }

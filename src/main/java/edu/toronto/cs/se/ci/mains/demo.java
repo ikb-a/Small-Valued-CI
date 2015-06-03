@@ -17,9 +17,9 @@ import edu.toronto.cs.se.ci.invokers.EventSourceInvoker;
  */
 public class demo {
 
-	static private String fileRealEvents = "./data/real_events.json";
-	static private String fileFakeEvents = "./data/fake_events.json";
-	static private String outFilePath = "./data/plausible event.arff";
+	static private String fileRealEvents = "./data/event data/chillwall.json";
+	static private String fileFakeEvents = "./data/event data/random.json";
+	static private String outFilePath = "./data/chillwall-versus-random.arff";
 	
 	public static void main(String [] args){
 		
