@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import edu.toronto.cs.se.ci.eventObjects.Event;
-import edu.toronto.cs.se.ci.eventObjects.BasicEvent;
-import edu.toronto.cs.se.ci.eventSources.CheckGuestListFB;
-import edu.toronto.cs.se.ci.eventSources.CheckGuestListNonFictional;
 import edu.toronto.cs.se.ci.eventSources.CheckOrganizerFB;
 import edu.toronto.cs.se.ci.eventSources.ClassifyingSource;
 import edu.toronto.cs.se.ci.eventSources.EventSource;
@@ -27,10 +24,10 @@ public class demo {
 	public static void main(String [] args){
 		
 		//load the real events
-		ArrayList<BasicEvent> realEvents = new ArrayList<BasicEvent>();
+		Event [] realEvents;
 		File inFile = new File(fileRealEvents);
 		try{
-			realEvents = BasicEvent.loadFromJsonFile(inFile);
+			realEvents = Event.loadFromJsonFile(inFile);
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -38,10 +35,10 @@ public class demo {
 		}
 		
 		//load the fake events
-		ArrayList<BasicEvent> fakeEvents = new ArrayList<BasicEvent>();
+		Event [] fakeEvents;
 		inFile = new File(fileFakeEvents);
 		try{
-			fakeEvents = BasicEvent.loadFromJsonFile(inFile);
+			fakeEvents = Event.loadFromJsonFile(inFile);
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -52,24 +49,26 @@ public class demo {
 		ArrayList<EventSource> sources = new ArrayList<EventSource>();
 		//classify the events with a classifying source
 		ClassifyingSource c = new ClassifyingSource("real event");
-		for (int i = 0; i < realEvents.size(); i++){
-			c.classify(realEvents.get(i), 1);
+		for (int i = 0; i < realEvents.length; i++){
+			c.classify(realEvents[i], 1);
 		}
-		for (int i = 0; i < fakeEvents.size(); i++){
-			c.classify(fakeEvents.get(i), 0);
+		for (int i = 0; i < fakeEvents.length; i++){
+			c.classify(fakeEvents[i], 0);
 		}
 		
 		//add all the sources
 		sources.add(c);
-		sources.add(new CheckGuestListFB());
 		sources.add(new GoogleMapsVenueAddress());
 		sources.add(new CheckOrganizerFB());
-		sources.add(new CheckGuestListNonFictional());
 		
 		//get a single list of events to invoke on
 		ArrayList<Event> events = new ArrayList<Event>();
-		events.addAll(fakeEvents);
-		events.addAll(realEvents);
+		for (int i = 0; i < realEvents.length; i++){
+			events.add(realEvents[i]);
+		}
+		for (int i = 0; i < fakeEvents.length; i++){
+			events.add(fakeEvents[i]);
+		}
 		
 		//invoke the sources
 		EventSourceInvoker invoker = new EventSourceInvoker("Event Plausibility", sources, events);

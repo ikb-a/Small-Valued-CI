@@ -2,10 +2,9 @@ package edu.toronto.cs.se.ci.mains;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-import edu.toronto.cs.se.ci.eventObjects.BasicEvent;
 import edu.toronto.cs.se.ci.eventObjects.Event;
-import edu.toronto.cs.se.ci.eventSources.CheckGuestListFB;
 import edu.toronto.cs.se.ci.eventSources.CheckOrganizerFB;
 import edu.toronto.cs.se.ci.eventSources.EventSource;
 import edu.toronto.cs.se.ci.eventSources.GoogleMapsVenueAddress;
@@ -21,12 +20,11 @@ public class OfflineDemo {
 	public static void main(String [] args) throws Exception{
 		
 		File inFile = new File("./data/events.json");
-		ArrayList<BasicEvent> events = BasicEvent.loadFromJsonFile(inFile);
+		Event [] events = Event.loadFromJsonFile(inFile);
 		
 		//create some sources
 		ArrayList<EventSource> sources = new ArrayList<EventSource>();
 		sources.add(new GoogleMapsVenueAddress());
-		sources.add(new CheckGuestListFB());
 		sources.add(new CheckOrganizerFB());
 		
 		//make sure all sources are caching and online
@@ -36,8 +34,7 @@ public class OfflineDemo {
 		}
 		
 		//invoke the sources on the events
-		ArrayList<Event> castedEventList = new ArrayList<Event>(events);
-		EventSourceInvoker invoker = new EventSourceInvoker("Offline invocation test", sources, castedEventList);
+		EventSourceInvoker invoker = new EventSourceInvoker("Offline invocation test", sources, Arrays.asList(events));
 		invoker.invoke();
 		System.out.printf("Invocation online : \n%s\n", invoker.getFormattedResults());
 		

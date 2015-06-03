@@ -1,4 +1,4 @@
-package edu.toronto.cs.se.ci.sources;
+package edu.toronto.cs.se.ci.eventSources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,17 +6,17 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import edu.toronto.cs.se.ci.realWorldObjects.Establishment;
+import edu.toronto.cs.se.ci.eventObjects.Address;
+import edu.toronto.cs.se.ci.eventObjects.Event;
+import edu.toronto.cs.se.ci.sources.NearbySearch;
 
 import com.google.common.base.Optional;
 
 import edu.toronto.cs.se.ci.UnknownException;
 import edu.toronto.cs.se.ci.budget.Expenditure;
-import edu.toronto.cs.se.ci.playground.data.Address;
 import edu.toronto.cs.se.ci.playground.sources.GMapsGeocode;
-import edu.toronto.cs.se.ci.utils.BasicSource;
 
-public class GMapsEstablishmentHasAddress extends BasicSource<Establishment, Integer, Void> {
+public class GMapsEstablishmentHasAddress extends EventSource {
 
 	static private GMapsGeocode googleMaps;
 	
@@ -33,12 +33,13 @@ public class GMapsEstablishmentHasAddress extends BasicSource<Establishment, Int
 	}
 
 	@Override
-	public Integer getResponse(Establishment e) {
+	protected Integer getResponseOnline(Event e) {
+		Address address = e.getVenue().getAddress();
 		
 		//find the cordinates of the establishment
 		List<Double> coordinates;
 		try {
-			coordinates = getCoordinates(e.getAddress());
+			coordinates = getCoordinates(address);
 		} catch (UnknownException e1) {
 			return -1;
 		}
@@ -50,19 +51,18 @@ public class GMapsEstablishmentHasAddress extends BasicSource<Establishment, Int
 		//find places near to the coordinates
 		ArrayList<String> places;
 		try {
-			places = placesNearTo(coordinates, e.getName());
+			places = placesNearTo(coordinates, e.getVenueName());
 		} catch (UnknownException e1) {
 			return -1;
 		}
 		
 		//return true if we found the name of the establishment near the establishment's address
-		if (places.contains(e.getName())){
+		if (places.contains(e.getVenueName())){
 			return 1;
 		}
 		else{
 			return 0;
 		}
-		
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class GMapsEstablishmentHasAddress extends BasicSource<Establishment, Int
 	public List<Double> getCoordinates(Address a) throws UnknownException{
 		
 		//get the json data of the address
-		JSONObject json = googleMaps.getResponse(a);
+		JSONObject json = googleMaps.getResponse(a.toOldAddressObject());
 		
 		//get the location
 		JSONArray results = json.getJSONArray("results");
@@ -120,13 +120,13 @@ public class GMapsEstablishmentHasAddress extends BasicSource<Establishment, Int
 	
 	
 	@Override
-	public Expenditure[] getCost(Establishment arg0) throws Exception {
+	public Expenditure[] getCost(Event arg0) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Void getTrust(Establishment arg0, Optional<Integer> arg1) {
+	public Void getTrust(Event arg0, Optional<Integer> arg1) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -82,7 +82,7 @@ public class YelpSearchJSON {
 		oAuthService.signRequest(accessToken, request);
 		
 		//debug
-		String url = request.getCompleteUrl();
+		//String url = request.getCompleteUrl();
 		
 		//get the response and return it as json
 		Response response = request.send();

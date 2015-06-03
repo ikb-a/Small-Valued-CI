@@ -4,12 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import edu.toronto.cs.se.ci.invokers.EventSourceInvoker;
-import edu.toronto.cs.se.ci.playground.data.Address;
-import edu.toronto.cs.se.ci.eventObjects.BasicEvent;
 import edu.toronto.cs.se.ci.eventObjects.Event;
 import edu.toronto.cs.se.ci.eventObjects.Venue;
-import edu.toronto.cs.se.ci.eventSources.CheckGuestListFB;
-import edu.toronto.cs.se.ci.eventSources.CheckGuestListNonFictional;
+import edu.toronto.cs.se.ci.eventObjects.Address;
 import edu.toronto.cs.se.ci.eventSources.EventSource;
 import edu.toronto.cs.se.ci.eventSources.GoogleMapsVenueAddress;
 
@@ -19,12 +16,12 @@ public class invocation {
 
 		//make some events
 		Address a1 = new Address("40", "St George Street", "Toronto", "Ontario", "Canada", "M5S 2E4");
-		Venue v1 = new Venue("Bahen Centre for Information Technology", a1, null);
+		Venue v1 = new Venue("Bahen Centre for Information Technology", a1);
 		ArrayList<String> guests1 = new ArrayList<String>(3);
 		guests1.add("William Ginsberg");
 		guests1.add("Marsha Chechik");
 		guests1.add("Rick Salay");
-		Event e1 = new BasicEvent(v1, guests1, null);
+		Event e1 = new Event(v1, guests1, null);
 		
 		Address a2 = new Address("51", "Baldwin St", "Toronto", "ON", "Canada", "M5T 1L1");
 		Venue v2 = new Venue("Kinton Ramen", a2, null);

@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 
 import edu.toronto.cs.se.ci.budget.Expenditure;
 import edu.toronto.cs.se.ci.eventObjects.Event;
-import edu.toronto.cs.se.ci.sources.GMapsEstablishmentHasAddress;
 
 /**
  * Wrapper for the functionality of the GMapsEstablishmentHasAddress source.
@@ -28,7 +27,7 @@ public class GoogleMapsVenueAddress extends EventSource {
 	public Integer getResponseOnline(Event e){
 		
 		try{
-			return googleMaps.getResponse(e.getVenue());
+			return googleMaps.getResponse(e);
 		}
 		catch (Exception ex){
 			return -1;
