@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.toronto.cs.se.ci.eventObjects.Event;
-import edu.toronto.cs.se.si.random.RandomObjectRandomizer;
+import edu.toronto.cs.se.ci.random.RandomObjectRandomizer;
 
 
 public class RandomEventTest {

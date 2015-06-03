@@ -7,7 +7,7 @@ import java.io.IOException;
 import com.google.gson.*;
 
 import edu.toronto.cs.se.ci.eventObjects.Event;
-import edu.toronto.cs.se.si.random.RandomObjectRandomizer;
+import edu.toronto.cs.se.ci.random.RandomObjectRandomizer;
 
 public class GenerateRandomEvents {
 

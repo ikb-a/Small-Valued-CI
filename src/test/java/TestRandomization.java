@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.toronto.cs.se.si.random.Randomization;
+import edu.toronto.cs.se.ci.random.Randomization;
 
 
 public class TestRandomization {
@@ -42,19 +42,19 @@ public class TestRandomization {
 	@Test
 	public void testIntegerInt() {
 	
-		assert(r.integer(0) == 0);
+		assertTrue(r.integer(0) == 0);
 
-		assert(r.integer(5) <= 5);
+		assertTrue(r.integer(5) <= 5);
 
-		assert(r.integer(1) >= 0);
+		assertTrue(r.integer(1) >= 0);
 	}
 
 	@Test
 	public void testIntegerIntInt() {
 		
 		int i = r.integer(10, 560);
-		assert(i >= 10);
-		assert(i <= 560);
+		assertTrue(i >= 10);
+		assertTrue(i <= 560);
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class TestRandomization {
 		Pattern pattern = Pattern.compile("[1-9][0-9][0-9]-[1-9][0-9][0-9]-[1-9][0-9][0-9][0-9]");
 		Matcher matcher = pattern.matcher(phone);
 		
-		assert(matcher.matches());
+		assertTrue(matcher.matches());
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class TestRandomization {
 		Pattern pattern = Pattern.compile("416-[1-9][0-9][0-9]-[1-9][0-9][0-9][0-9]");
 		Matcher matcher = pattern.matcher(phone);
 		
-		assert(matcher.matches());
+		assertTrue(matcher.matches());
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class TestRandomization {
 		Pattern pattern = Pattern.compile(".*@*\\..*");
 		Matcher matcher = pattern.matcher(email);
 		
-		assert(matcher.matches());
+		assertTrue(matcher.matches());
 	}
 
 	@Test
@@ -95,7 +95,7 @@ public class TestRandomization {
 		Pattern pattern = Pattern.compile(".*@cs.toronto.edu");
 		Matcher matcher = pattern.matcher(email);
 		
-		assert(matcher.matches());
+		assertTrue(matcher.matches());
 	}
 
 	@Test
@@ -103,6 +103,6 @@ public class TestRandomization {
 		String domain = r.domain();
 		Pattern pattern = Pattern.compile(".*\\..*");
 		Matcher matcher = pattern.matcher(domain);
-		assert(matcher.matches());
+		assertTrue(matcher.matches());
 	}
 }

@@ -1,4 +1,4 @@
-package edu.toronto.cs.se.si.random;
+package edu.toronto.cs.se.ci.random;
 import java.util.Random;
 
 
@@ -115,6 +115,7 @@ public class Randomization {
 	 * @return
 	 */
 	public int integer(int bound){
+		if (bound == 0) return 0;
 		return random.nextInt(bound);
 	}
 	

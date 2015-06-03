@@ -1,4 +1,4 @@
-package edu.toronto.cs.se.si.random;
+package edu.toronto.cs.se.ci.random;
 
 import edu.toronto.cs.se.ci.eventObjects.Address;
 import edu.toronto.cs.se.ci.eventObjects.Event;

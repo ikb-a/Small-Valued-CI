@@ -1,6 +1,7 @@
 package edu.toronto.cs.se.ci.mains;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ import edu.toronto.cs.se.ci.eventSources.CheckOrganizerFB;
 import edu.toronto.cs.se.ci.eventSources.ClassifyingSource;
 import edu.toronto.cs.se.ci.eventSources.EventSource;
 import edu.toronto.cs.se.ci.eventSources.GoogleMapsVenueAddress;
+import edu.toronto.cs.se.ci.eventSources.OrganizerWebSiteExists;
 import edu.toronto.cs.se.ci.invokers.EventSourceInvoker;
 
 /**
@@ -20,8 +22,9 @@ public class demo {
 	static private String fileRealEvents = "./data/event data/chillwall.json";
 	static private String fileFakeEvents = "./data/event data/random.json";
 	static private String outFilePath = "./data/chillwall-versus-random.arff";
+	static private String logFilePath = "./log.txt";
 	
-	public static void main(String [] args){
+	public static void main(String [] args) throws IOException{
 		
 		//load the real events
 		Event [] realEvents;
@@ -60,6 +63,12 @@ public class demo {
 		sources.add(c);
 		sources.add(new GoogleMapsVenueAddress());
 		sources.add(new CheckOrganizerFB());
+		sources.add(new OrganizerWebSiteExists());
+		
+		//let's have the log printed to a log.txt file
+		FileWriter logWriter = new FileWriter(logFilePath);
+		logWriter.write("demo.java\n\n");
+		EventSource.setLogWriter(logWriter);
 		
 		//get a single list of events to invoke on
 		ArrayList<Event> events = new ArrayList<Event>();

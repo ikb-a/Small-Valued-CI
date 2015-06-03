@@ -2,6 +2,7 @@ package edu.toronto.cs.se.ci.eventSources;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,6 +19,19 @@ import edu.toronto.cs.se.ci.utils.BasicSource;
 
 public abstract class EventSource extends BasicSource<Event, Integer, Void> implements OfflineSource{
 
+	public static byte PRIORITY_ONLINE = 0;
+	public static byte PRIORITY_OFFLINE = 1;
+	
+	/**
+	 * Prioritize using online or offline sources.
+	 */
+	protected static byte priority = PRIORITY_OFFLINE;
+	
+	/**
+	 * A place to print log information to
+	 */
+	protected static FileWriter logWriter;
+	
 	private static String cacheDirectory = "./data/cache/";
 	
 	/**
@@ -66,21 +80,67 @@ public abstract class EventSource extends BasicSource<Event, Integer, Void> impl
 	
 	public EventSource(){
 		runTimeCache = new HashMap<String, Integer>();
+		if (logWriter == null){
+			logWriter = new FileWriter(FileDescriptor.out);
+		}
 	}
 	
+	/**
+	 * Write to the log that this source is being invoked online with a given event.
+	 */
+	protected void logInvokingOnline(Event e){
+		try {
+			logWriter.write(String.format("ASK-ONLINE: %s : %s\n", toString(), e.toString()));
+		} catch (IOException ex) {
+			return;
+		}
+	}
+	
+	/**
+	 * Write to the log that this source is being invoked offline with a given event.
+	 */
+	protected void logInvokingOffline(Event e){
+		try {
+			logWriter.write(String.format("ASK-OFFLINE: %s : %s\n", toString(), e.toString()));
+		} catch (IOException ex) {
+			return;
+		}
+	}
+	
+	/**
+	 * This method can execute the source online or offline. The
+	 * static varibale priority will determine which one is tried first,
+	 * however if isOnline returns false, then the offline mode will be used for this instance.
+	 */
 	public Integer getResponse(Event e){
 		//get the response
-		Integer response;
-		if (isOnline){
-			response = getResponseOnline(e);
-		}
-		else{
-			try {
-				response = getResponseOffline(e);
-			} catch (FileNotFoundException e1) {
-				response = -1;
+		Integer response = null;
+		if (priority == PRIORITY_ONLINE){
+			if (isOnline){
+
+				logInvokingOnline(e);
+				response = getResponseOnline(e);
+			}
+			else{
+				try {
+
+					logInvokingOffline(e);
+					response = getResponseOffline(e);
+				} catch (FileNotFoundException e1) {
+					response = -1;
+				}
 			}
 		}
+		else if (priority == PRIORITY_OFFLINE){
+			try {
+				
+				logInvokingOffline(e);
+				response = getResponseOffline(e);
+			} catch (FileNotFoundException e1) {
+				return -1;
+			}
+		}
+				
 		//runtime cache the response
 		if (useRuntimeCache){
 			runTimeCache.put(e.getID(), response);
@@ -193,5 +253,18 @@ public abstract class EventSource extends BasicSource<Event, Integer, Void> impl
 		}
 		return json;
 	}
+	public static byte getPriority() {
+		return priority;
+	}
+	public static void setPriority(byte priority) {
+		EventSource.priority = priority;
+	}
+	public static FileWriter getLogWriter() {
+		return logWriter;
+	}
+	public static void setLogWriter(FileWriter logWriter) {
+		EventSource.logWriter = logWriter;
+	}
+
 	
 }
