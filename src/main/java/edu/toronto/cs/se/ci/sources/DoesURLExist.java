@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 import com.google.common.base.Optional;
 
@@ -41,16 +42,26 @@ public class DoesURLExist extends BasicSource<String, Integer, Void> {
 		} catch (IOException e) {
 			return -1;
 		}
-			//and set it back to what it was before
-		HttpURLConnection.setFollowRedirects(oldHttpFollowRedirects);
+
 		
 		//connect
 		try {
 			connection.connect();
-		} catch (IOException e) {
+			//and set it back to what it was before
+			HttpURLConnection.setFollowRedirects(oldHttpFollowRedirects);
+		}
+		catch (UnknownHostException ex){
+			//and set it back to what it was before
+			HttpURLConnection.setFollowRedirects(oldHttpFollowRedirects);
+			return 0;
+		}
+		catch (IOException ex) {
+			//and set it back to what it was before
+			HttpURLConnection.setFollowRedirects(oldHttpFollowRedirects);
 			return -1;
 		}
-
+		
+		
 		//deal with the response code
 		int responseCode = 0;
 		try {

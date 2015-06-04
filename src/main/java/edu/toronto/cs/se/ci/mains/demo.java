@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import edu.toronto.cs.se.ci.eventObjects.Event;
 import edu.toronto.cs.se.ci.eventSources.CheckOrganizerFB;
+import edu.toronto.cs.se.ci.eventSources.CheckOrganizerFBExact;
 import edu.toronto.cs.se.ci.eventSources.ClassifyingSource;
 import edu.toronto.cs.se.ci.eventSources.EventSource;
 import edu.toronto.cs.se.ci.eventSources.GoogleMapsVenueAddress;
@@ -21,8 +22,8 @@ import edu.toronto.cs.se.ci.invokers.EventSourceInvoker;
 public class demo {
 
 	static private String fileRealEvents = "./data/event data/chillwall.json";
-	static private String fileFakeEvents = "./data/event data/fake_english_events.json";
-	static private String outFilePath = "./data/chillwall-versus-random-english.arff";
+	static private String fileFakeEvents = "./data/event data/fully_scrambled_chillwall.json";
+	static private String outFilePath = "./data/chillwall-versus-full-scramble-0.3.arff";
 	static private String logFilePath = "./log.txt";
 	
 	public static void main(String [] args) throws IOException{
@@ -64,8 +65,10 @@ public class demo {
 		sources.add(c);
 		sources.add(new GoogleMapsVenueAddress());
 		sources.add(new CheckOrganizerFB());
+		sources.add(new CheckOrganizerFBExact());
 		sources.add(new OrganizerWebSiteExists());
 		sources.add(new OrganizerFaceBookExists());
+
 		
 		//let's have the log printed to a log.txt file
 		FileWriter logWriter = new FileWriter(logFilePath);

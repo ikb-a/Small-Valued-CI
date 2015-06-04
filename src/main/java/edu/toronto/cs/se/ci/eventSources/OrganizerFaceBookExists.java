@@ -16,7 +16,7 @@ public class OrganizerFaceBookExists extends EventSource{
 	
 	@Override
 	public String getName(){
-		return "Organizer facebook exists";
+		return "Organization facebook url exists";
 	}
 	
 	@Override

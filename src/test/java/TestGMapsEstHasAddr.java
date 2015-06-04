@@ -73,4 +73,26 @@ public class TestGMapsEstHasAddr {
 		assertNotEquals(result, 1);
 	}
 
+	@Test
+	public void testRandomEnglish(){
+		
+		Event event;
+		Address address;
+		Venue venue;
+		int result;
+		
+		address = new Address("83634", "random words", "these", "are", "words", "G0Y 6J9");
+		venue = new Venue("red leadership dragon manage volume", address);
+		event = new Event("random English test 1", "", "random english words", venue, null, null);
+		result = gMaps.getResponse(event);
+		assertNotEquals(result, 1);
+		
+		address = new Address("83634", "another random", "test", "refigerator", "wow", "G0Y 6J9");
+		venue = new Venue("airplane sesame guava inversion hotter", address);
+		event = new Event("random English test 2", "", "random english words", venue, null, null);
+		result = gMaps.getResponse(event);
+		assertNotEquals(result, 1);
+		
+	}
+	
 }

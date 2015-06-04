@@ -19,43 +19,58 @@ public class TestDoesUrlExist {
 	@Test
 	public void testRealURLs() {
 		
-		String url = "http://web.cs.toronto.edu/research/areas/se.htm";
-		assertTrue(urlChecker.getResponse(url) != 0);
+		String [] urls = {"http://web.cs.toronto.edu/research/areas/se.htm",
+				"http://docs.oracle.com/javase/7/docs/api/java/net/HttpURLConnection.html",
+				"https://github.com/wginsberg/Small-Valued-CI",
+				"http://jsonformatter.curiousconcept.com/",
+				"http://jsonformatter.curiousconcept.com/"
+		};
 		
-		url = "http://docs.oracle.com/javase/7/docs/api/java/net/HttpURLConnection.html";
-		assertTrue(urlChecker.getResponse(url) != 0);
-		
-		url = "https://github.com/wginsberg/Small-Valued-CI";
-		assertTrue(urlChecker.getResponse(url) != 0);
-		
-		url = "http://jsonformatter.curiousconcept.com/";
-		assertTrue(urlChecker.getResponse(url) != 0);
+		int response;
+		String url;
+		for (int i =0; i < urls.length; i++){
+			url = urls[i];
+			response = urlChecker.getResponse(url);
+			assertTrue(response != 0);
+		}
 	}
 	
 	@Test
 	public void testMalformedURLs() {
 		
-		String url = "asdasdasdasdasd";
-		assertTrue(urlChecker.getResponse(url) != 1);
+		String [] urls = {"asdasdasdasdasd",
+				"swag.swag.swag.swag.swag.swag",
+				"",
+				"htt.,456.,ps://,.,gith45654ub.456.com.,/wginsb67967erg/Sm4564all-=-09876Val;;`ued-CI",
+				"http://\"o zwKrr D/",
+				"http://e\"j zfossbeyowNiwA /",
+				"http://x\"nabgw hohbkDyvv /"
+		};
 		
-		url = "swag.swag.swag.swag.swag.swag";
-		assertTrue(urlChecker.getResponse(url) != 0);
-		
-		url = "htt.,456.,ps://,.,gith45654ub.456.com.,/wginsb67967erg/Sm4564all-=-09876Val;;`ued-CI";
-		assertTrue(urlChecker.getResponse(url) != 0);
-		
-		url = "";
-		assertTrue(urlChecker.getResponse(url) != 0);
+		int response;
+		String url;
+		for (int i =0; i < urls.length; i++){
+			url = urls[i];
+			response = urlChecker.getResponse(url);
+			assertTrue(response != 1);
+		}
 	}
 
 	@Test
 	public void testInvalidURLs() {
 		
-		String url = "http://www.google.com/willginsberg";
-		assertTrue(urlChecker.getResponse(url) != 1);
+		String [] urls = {"http://www.google.com/willginsberg",
+				"https://en.wikipedia.org/wiki/Collaborative_Implementation"
+		};
 		
-		url = "https://en.wikipedia.org/wiki/Collaborative_Implementation";
-		assertTrue(urlChecker.getResponse(url) != 0);
+		int response;
+		String url;
+		for (int i =0; i < urls.length; i++){
+			url = urls[i];
+			response = urlChecker.getResponse(url);
+			assertTrue(response != 1);
+		}
+		
 	}
 	
 }

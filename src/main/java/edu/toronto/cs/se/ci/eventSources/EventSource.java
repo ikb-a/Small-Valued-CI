@@ -132,17 +132,21 @@ public abstract class EventSource extends BasicSource<Event, Integer, Void> impl
 			}
 		}
 		else if (priority == PRIORITY_OFFLINE){
+			boolean gotGoodAnswer = false;
 			try {
 				logInvokingOffline(e);
 				response = getResponseOffline(e);
 				
-				//try looking online if we didn't got an unknown response and we are allowed to
-				if (response == -1 && isOffline() == false){
-					logInvokingOnline(e);
-					response = getResponseOnline(e);					
-				}
+				//a good answer is not unknown
+				gotGoodAnswer = response != -1;
+				
 			} catch (FileNotFoundException e1) {
-				return -1;
+				gotGoodAnswer = false;
+			}
+			//try looking online if we can do better
+			if (gotGoodAnswer == false && isOffline() == false){
+				logInvokingOnline(e);
+				response = getResponseOnline(e);					
 			}
 		}
 				

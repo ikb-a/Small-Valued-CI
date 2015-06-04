@@ -2,15 +2,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import edu.toronto.cs.se.ci.sources.FaceBookProfileCheck;
+import edu.toronto.cs.se.ci.sources.FBProfileLooselyExists;
 
 
-public class TestFBProfileCheck {
+public class LooseFBProfileTest {
 
-	static FaceBookProfileCheck fb;
+	static FBProfileLooselyExists fb;
 	
-	public TestFBProfileCheck(){
-		fb = new FaceBookProfileCheck();
+	public LooseFBProfileTest(){
+		fb = new FBProfileLooselyExists();
 		fb.setNumResultsToCheck(5);
 	}
 	
@@ -23,7 +23,7 @@ public class TestFBProfileCheck {
 			int result;
 			result = fb.getResponse(names[i]);
 			//assertNotEquals(result, 0);
-			assertFalse(result == 0);
+			assertNotEquals(result, 0);
 		}
 		
 	}

@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import edu.toronto.cs.se.ci.helpers.GoogleSearchJSON;
+import edu.toronto.cs.se.ci.helpers.StringComparison;
 
 import com.google.common.base.Optional;
 
@@ -15,7 +16,12 @@ import edu.toronto.cs.se.ci.UnknownException;
 import edu.toronto.cs.se.ci.budget.Expenditure;
 import edu.toronto.cs.se.ci.utils.BasicSource;
 
-public class FaceBookProfileCheck extends BasicSource<String, Integer, Void> {
+/**
+ * Checks for a fabeook profile, but does not require an exact match
+ * @author wginsberg
+ *
+ */
+public class FBProfileLooselyExists extends BasicSource<String, Integer, Void> {
 
 	/**
 	 * How many Google Search results should be checked to see if they are
@@ -29,8 +35,9 @@ public class FaceBookProfileCheck extends BasicSource<String, Integer, Void> {
 	public boolean allowNonPeople = false;
 	
 	/**
-	 * Returns true iff a google search for "<Name> Facebook" returned
-	 * results and one result was a Facebook profile page.
+	 * Returns true if a google search for "<Name> Facebook" returned
+	 * results and one result was a Facebook profile page containing
+	 * all of the words in <Name>.
 	 */
 	@Override
 	public Integer getResponse(String name) {
@@ -63,14 +70,26 @@ public class FaceBookProfileCheck extends BasicSource<String, Integer, Void> {
 			 * It could either be "<Name> | Facebook" or "<Name> Profiles | Facebook",
 			 * in the case where there are multiple matches (Seems to be how it works)
 			 */
-			if (title.equals(name + " | Facebook") || title.equals(name + " Profiles | Facebook")){
-					if (isNonPerson(content)){
-						return 0;
-					}
-					else{
+			
+			//check title of page contains all of the words in the name
+			if (StringComparison.containsAllWords(title, name.split(" "))){
+				//check title of page is a facebook page
+				if (title.contains("| Facebook")){
+					if (allowNonPeople){
 						return 1;
 					}
+					//check that it is a person's profile
+					else{
+						if (isNonPerson(content)){
+							return 0;
+						}
+						else{
+							return 1;
+						}
+					}
 			}
+			}
+			
 		}
 		return 0;
 	}
@@ -79,7 +98,7 @@ public class FaceBookProfileCheck extends BasicSource<String, Integer, Void> {
 	 * Returns true if the description contains something like
 	 * "X talking about this" or "Y likes" or "Z were here"
 	 */
-	private boolean isNonPerson(String pageDescrption){
+	protected boolean isNonPerson(String pageDescrption){
 		
 		/*
 		 * create regular expressions which tell us a facebook
