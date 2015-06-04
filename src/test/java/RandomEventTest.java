@@ -4,16 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.toronto.cs.se.ci.eventObjects.Event;
-import edu.toronto.cs.se.ci.random.RandomObjectRandomizer;
-
+import edu.toronto.cs.se.ci.random.EventObjectRandomizer;
+import edu.toronto.cs.se.ci.random.GibberishEventGenerator;
 
 public class RandomEventTest {
 
-	RandomObjectRandomizer r;
+	EventObjectRandomizer r;
 	
 	@Before
 	public void setUp() throws Exception {
-		r = new RandomObjectRandomizer();
+		r = new EventObjectRandomizer(new GibberishEventGenerator());
 	}
 
 	@Test

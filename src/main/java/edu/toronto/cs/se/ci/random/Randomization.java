@@ -2,7 +2,7 @@ package edu.toronto.cs.se.ci.random;
 import java.util.Random;
 
 
-public class Randomization {
+public abstract class Randomization {
 
 	protected static int MIN_EMAIL_ADDRESS_LENGTH = 5;
 	protected static int MAX_EMAIL_ADDRESS_LENGTH = 20;
@@ -12,6 +12,9 @@ public class Randomization {
 	protected static String LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
 	protected static String UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	protected static String PUNCTUATION = ",.;:'\"()!?";
+	
+	protected static String [] emailDomains = {"gmail", "yahoo", "hotmail", "aol", "live", "cs.toronto", "utoronto", "facebook", "google"};
+	protected static String [] countryCodes = {"com", "ca", "edu", "org", "gov", "net", "co.uk"};
 	
 	protected Random random;
 	
@@ -23,11 +26,28 @@ public class Randomization {
 		random = new Random(seed);
 	}
 	
+	abstract public String randomTitle();
+	abstract public String randomDescription();
+	abstract public String randomName();
+	abstract public String randomTwitterHandle();
+	abstract public String randomTwitterURL();
+	abstract public String randomFaceBookURL();
+	abstract public String randomURL();
+	abstract public String randomEmail();
+	abstract public String randomPhoneNumber();
+	abstract public String randomVenueName();
+	abstract public String randomCity();
+	abstract public String randomStreetNumber();
+	abstract public String randomCountry();
+	abstract public String randomProvince();
+	abstract public String randomPostalCode();
+	abstract public String randomStreetName();
+	
 	/**
 	 * A random character in the ASCII range 32-126 inclusive.
 	 * @return
 	 */
-	public char character(){
+	protected char character(){
 		int randInt = random.nextInt();
 		if (randInt < 0) randInt *= -1;
 		int normalized = 32 + (randInt % (126-32));
@@ -41,7 +61,7 @@ public class Randomization {
 	 * @param alphabet
 	 * @return
 	 */
-	public char character(String alphabet){
+	protected char character(String alphabet){
 		return alphabet.charAt(integer(alphabet.length()));
 	}
 	
@@ -52,7 +72,7 @@ public class Randomization {
 	 * @param alphabet - the set of characters to draw characters from
 	 * @return
 	 */
-	public String string(int minLength, int maxLength, String alphabet){
+	protected String string(int minLength, int maxLength, String alphabet){
 		
 		int length;
 		if (minLength == maxLength){
@@ -77,7 +97,7 @@ public class Randomization {
 	 * @param maxLength - must be greater than 0
 	 * @return
 	 */
-	public String string(int minLength, int maxLength){
+	protected String string(int minLength, int maxLength){
 
 		//generate a string of only lowercase letter
 		StringBuffer s = new StringBuffer(string(minLength, maxLength, LOWER_CASE));
@@ -114,7 +134,7 @@ public class Randomization {
 	 * @param bound - maximum value (inclusive bound)
 	 * @return
 	 */
-	public int integer(int bound){
+	protected int integer(int bound){
 		if (bound == 0) return 0;
 		return random.nextInt(bound);
 	}
@@ -125,18 +145,18 @@ public class Randomization {
 	 * @param max - inclusive maximum value
 	 * @return
 	 */
-	public int integer(int min, int max){
+	protected int integer(int min, int max){
 		return min + integer(max - min);
 	}
 	
-	public long longNumber(){
+	protected long longNumber(){
 		return random.nextLong();
 	}
 	
 	/**
 	 * Returns a randomly generated phone number in the format <areaCode>-xxx-xxxx
 	 */
-	public String phoneNumber(String areaCode){
+	protected String phoneNumber(String areaCode){
 		return String.format("%s-%s-%s",
 				areaCode,
 				String.valueOf(integer(100, 999)),
@@ -146,85 +166,49 @@ public class Randomization {
 	/**
 	 * Returns a randomly generated phone number in the format xxx-xxx-xxxx
 	 */
-	public String phoneNumber(){
+	protected String phoneNumber(){
 		//randomly create the area code
 		return phoneNumber(
 				String.valueOf(integer(100, 999)));
 	}
 	
-	/**
-	 * Returns a random email address in the format xxx@<domain>
-	 * @param domain - A domain like "gmail.com" or "yahoo.co.uk"
-	 */
-	public String emailAddress(String domain){
-		String peronsal = string(MIN_EMAIL_ADDRESS_LENGTH, MAX_EMAIL_ADDRESS_LENGTH);
-		return peronsal + "@" + domain;
+	protected String emailDomain(){
+		return emailDomains[Math.abs(random.nextInt()) % emailDomains.length];
 	}
 	
-	/**
-	 * Returns a totally random email address in the format xxxx@xxxx.xxxx
-	 */
-	public String emailAddress(){
-		String domain = domain();
-		return emailAddress(domain);
+	protected String countryCode(){
+		return countryCodes[Math.abs(random.nextInt()) % countryCodes.length];
 	}
 	
-	/**
-	 * Returns a random domain of the format xxx.yyy
-	 * The first part of the domain will have a length bounded by MIN_DOMAIN_LENGTH, MAX_DOMAIN_LENGTH.
-	 * The last part will have length 2 or 3.
-	 * @return
-	 */
-	public String domain(){
-		return string(MIN_DOMAIN_LENGTH, MAX_DOMAIN_LENGTH) + 
-				string(2, 3);
-	}
-	
-	/**
-	 * Returns a random website URL
-	 * @return
-	 */
-	public String website(){
-		return String.format("http://%s/", domain());
-	}
-	
-	/**
-	 * Returns a random string of the format xxx xxx
-	 * @return
-	 */
-	public String postalCode(){
-		return string(3,3) + " " + string(3,3);
-	}
-	
-	public static int getMIN_EMAIL_ADDRESS_LENGTH() {
+	protected static int getMIN_EMAIL_ADDRESS_LENGTH() {
 		return MIN_EMAIL_ADDRESS_LENGTH;
 	}
 
-	public static void setMIN_EMAIL_ADDRESS_LENGTH(int mIN_EMAIL_ADDRESS_LENGTH) {
+	protected static void setMIN_EMAIL_ADDRESS_LENGTH(int mIN_EMAIL_ADDRESS_LENGTH) {
 		MIN_EMAIL_ADDRESS_LENGTH = mIN_EMAIL_ADDRESS_LENGTH;
 	}
 
-	public static int getMAX_EMAIL_ADDRESS_LENGTH() {
+	protected static int getMAX_EMAIL_ADDRESS_LENGTH() {
 		return MAX_EMAIL_ADDRESS_LENGTH;
 	}
 
-	public static void setMAX_EMAIL_ADDRESS_LENGTH(int mAX_EMAIL_ADDRESS_LENGTH) {
+	protected static void setMAX_EMAIL_ADDRESS_LENGTH(int mAX_EMAIL_ADDRESS_LENGTH) {
 		MAX_EMAIL_ADDRESS_LENGTH = mAX_EMAIL_ADDRESS_LENGTH;
 	}
 
-	public static int getMIN_DOMAIN_LENGTH() {
+	protected static int getMIN_DOMAIN_LENGTH() {
 		return MIN_DOMAIN_LENGTH;
 	}
 
-	public static void setMIN_DOMAIN_LENGTH(int mIN_DOMAIN_LENGTH) {
+	protected static void setMIN_DOMAIN_LENGTH(int mIN_DOMAIN_LENGTH) {
 		MIN_DOMAIN_LENGTH = mIN_DOMAIN_LENGTH;
 	}
 
-	public static int getMAX_DOMAIN_LENGTH() {
+	protected static int getMAX_DOMAIN_LENGTH() {
 		return MAX_DOMAIN_LENGTH;
 	}
 
-	public static void setMAX_DOMAIN_LENGTH(int mAX_DOMAIN_LENGTH) {
+	protected static void setMAX_DOMAIN_LENGTH(int mAX_DOMAIN_LENGTH) {
 		MAX_DOMAIN_LENGTH = mAX_DOMAIN_LENGTH;
 	}
 
