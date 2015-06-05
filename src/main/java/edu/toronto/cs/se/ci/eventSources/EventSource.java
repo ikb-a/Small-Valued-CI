@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.json.JSONObject;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
@@ -67,6 +69,8 @@ public abstract class EventSource extends BasicSource<Event, Integer, Void> impl
 	/**
 	 * Use the local hard drive cache when the run time cache and internet are not used.
 	 */
+	protected File localCache;
+	protected JSONObject localCacheJson;
 	protected boolean useLocalCache = true;
 	public void stopLocalCaching(){
 		useLocalCache = false;
@@ -199,11 +203,17 @@ public abstract class EventSource extends BasicSource<Event, Integer, Void> impl
 			return -1;
 		}
 		
-		File cacheFile = new File(cacheDirectory + getName() + ".json");
-		JsonReader reader;
-		reader = new JsonReader(new FileReader(cacheFile));
-		JsonParser parser = new JsonParser();
-		JsonObject json = (JsonObject) parser.parse(reader);
+		//the cached json object of the event
+		JsonObject json = null;
+		if (localCacheJson == null){
+			if (localCache == null){
+				localCache = new File(cacheDirectory + getName() + ".json");
+			}
+			JsonReader reader;
+			reader = new JsonReader(new FileReader(localCache));
+			JsonParser parser = new JsonParser();
+			json = (JsonObject) parser.parse(reader);	
+		}
 		
 		String key = e.getID();
 		if (json.has(key)){
@@ -220,8 +230,7 @@ public abstract class EventSource extends BasicSource<Event, Integer, Void> impl
 	 * @param original - A previous cache file to append to.
 	 * @param destination - The file to save the cache to.
 	 * @throws IOException
-	 */
-	protected void saveCache(File original, File destination) throws IOException{
+	 */	protected void saveCache(File original, File destination) throws IOException{
 		
 		//read the existing json if it exists
 		JsonReader reader;

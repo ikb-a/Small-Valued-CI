@@ -43,13 +43,14 @@ public class GoogleCoocurrence extends BasicSource<String [], Integer, Void> {
 		int numResultsToCheck = Math.min(MAX_RESULTS_TO_CHECK, results.length());
 		for (int i = 0; i < numResultsToCheck; i++){
 			JSONObject result = results.getJSONObject(i);
-			//check the title and the snippet
+			//check the title, link, and snippet
 			String title = result.getString("title");
 			String snippet = result.getString("snippet");
+			String link = result.getString("link");
 			//check that it contains the strings 
 			boolean containsAll = true;
 			for (int j = 1; j < input.length; j++){
-				if (!title.contains(input[j]) && !snippet.contains(input[j])){
+				if (!title.contains(input[j]) && !snippet.contains(input[j]) && !link.contains(input[j])){
 					containsAll = false;
 					break;
 				}
