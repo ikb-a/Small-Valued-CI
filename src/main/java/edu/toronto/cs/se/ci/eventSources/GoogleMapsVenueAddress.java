@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 
 import edu.toronto.cs.se.ci.budget.Expenditure;
 import edu.toronto.cs.se.ci.eventObjects.Event;
+import edu.toronto.cs.se.ci.sources.SourceFactory;
 
 /**
  * Wrapper for the functionality of the GMapsEstablishmentHasAddress source.
@@ -15,7 +16,8 @@ public class GoogleMapsVenueAddress extends EventSource {
 	private GMapsEstablishmentHasAddress googleMaps;
 	
 	public GoogleMapsVenueAddress() {
-		googleMaps = new GMapsEstablishmentHasAddress();
+		//googleMaps = new GMapsEstablishmentHasAddress();
+		googleMaps = (GMapsEstablishmentHasAddress) SourceFactory.getSource(GMapsEstablishmentHasAddress.class);
 	}
 
 	@Override

@@ -12,7 +12,10 @@
             "contact":{
                "website":"http://www.virtualnuggets.com/ibm-websphere-cast-iron.html",
                "email":"info@virtualnuggets com",
-               "phone":"+1-707 666 8949"
+               "phone":"+1-707 666 8949",
+               "twitter_url":"https://twitter.com/virtualnuggets",
+               "twitter_handle":"@VirtualNuggets",
+               "facebook_url":"https://www.facebook.com/pages/VirtualNuggets/646095062107215"
             }
          },
          "venue":{
@@ -38,7 +41,8 @@
          "organizer":{
             "contact":{
                "email":"www.kellsnaturalphotography.com",
-               "phone":"9059204947"
+               "phone":"9059204947",
+               "facebook_url":"https://www.facebook.com/KellsNaturalPhotography"
             }
          },
          "venue":{
@@ -61,7 +65,8 @@
          "organizer":{
             "name":"Allure Fitness Inc. Brantford",
             "contact":{
-               "facebook_page":"Allure Fitness Inc. Brantford",
+               "facebook_url":"https://www.facebook.com/allurefitnessincbrantford",
+               "twitter_url":"https://twitter.com/ALLUREFITNESS",
                "twitter_handle":"@ALLUREFITNESS",
                "website":"http://www.allurefitnessinc.com/",
                "email":"allurefitnessinc@gmail.com",
@@ -90,8 +95,19 @@
             "end_date":"07/06/2015",
             "end_time":"5:00 PM"
          },
+         "organizer":{
+           "name":"Hamilton Arts Council",
+           "contact":{
+             "website":"https://hamiltonartscouncil.ca",
+             "facebook_url":"https://www.facebook.com/hamiltonarts.council",
+             "twitter_url":"https://twitter.com/hamartscouncil",
+             "twitter_handle":"@HamArtsCouncil",
+             "phone":"905-481-3218",
+             "email":"info@hamiltonartscouncil.ca"
+           }
+         },
          "venue":{
-            "name":"Gooderham Galler",
+            "name":"Gooderham Gallery",
             "address":{
                "street_number":"141",
                "route":"Catharine Street North",
@@ -115,7 +131,9 @@
          "organizer":{
             "name":"Damask Studios",
             "contact":{
-               "facebook_page":"Damask Studios",
+               "facebook_url":"https://www.facebook.com/DamaskStudios",
+               "twitter_url":"https://twitter.com/davybisaro",
+               "twitter_handle":"@DavyBisaro",
                "website":"http://damaskstudios.com/",
                "phone":"6477163289"
             }
@@ -143,8 +161,11 @@
             "end_time":"5:00 PM"
          },
          "organizer":{
-            "name":"McMaster Children's Hospital, Simulation and Outreach ",
+            "name":"McMaster Children's Hospital, Simulation and Outreach",
             "contact":{
+              "phone":"905-521-2100 ",
+              "email":"outreach@hhsc.ca",
+              "facebook_url":"https://www.facebook.com/SupportMacKids",
                "website":"http://www.mcmasterchildrenshospital.ca/outreach "
             }
          },
@@ -174,6 +195,7 @@
             "name":"EthicScan Canada",
             "contact":{
                "website":"http://www.ethicscan.ca/events/upmanship-the-new-science-of-csr/",
+               "facebook_url":"https://www.facebook.com/EthicScan",
                "email":"ethicscan@gmail.com ",
                "phone":"416-783-6776 ext. 102"
             }
@@ -200,7 +222,11 @@
             "end_time":"8:00 AM"
          },
          "organizer":{
-            "name":"DnB Hive"
+            "name":"DnB Hive",
+            "twitter_url":"https://twitter.com/dnbhive",
+            "twitter_handle":"@DnbHive",
+            "facebook_url":"https://www.facebook.com/DnBHive",
+            "website":"http://dnbhivetoronto.com/"
          },
          "venue":{
             "name":"DnB Hive",
@@ -220,6 +246,15 @@
          "time":{
             "start_date":"01/06/2015",
             "start_time":"8:00 AM"
+         },
+         "organizer":{
+            "name":"EthicScan Canada",
+            "contact":{
+               "website":"http://www.ethicscan.ca/events/upmanship-the-new-science-of-csr/",
+               "facebook_url":"https://www.facebook.com/EthicScan",
+               "email":"ethicscan@gmail.com ",
+               "phone":"416-783-6776 ext. 102"
+            }
          },
          "venue":{
             "name":"Spirale Banquet Centre",
@@ -246,8 +281,9 @@
          "organizer":{
             "name":"",
             "contact":{
+               "twitter_url":"https://twitter.com/agakhanmuseum",
                "twitter_handle":"@AgaKhanMuseum",
-               "facebook_page":"Aga Khan Museum",
+               "facebook_url":"https://www.facebook.com/agakhanmuseumtoronto",
                "website":"    http://www.agakhanmuseum.org",
                "email":"information@agakhanmuseum.org,",
                "phone":"416-646-4677"
@@ -302,8 +338,9 @@
          "organizer":{
             "name":"Canadian Opera Company",
             "contact":{
+               "twitter_url":"https://twitter.com/canadianopera",
                "twitter_handle":"@CanadianOpera",
-               "facebook_page":"Canadian Opera Company",
+               "facebook_url":"https://www.facebook.com/canadianoperacompany",
                "website":"http://www.coc.ca",
                "email":"service@coc.ca",
                "phone":"416-363-8231"
@@ -335,9 +372,10 @@
             "name":"Diane Chong",
             "contact":{
                "twitter_handle":"@RyersonCUE",
-               "facebook_page":"CentreForUrbanEnergy",
-               "website":"http://www.ryerson.ca/cue ",
-               "email":"diane.chong@ryerson.ca.",
+               "twitter_url":"https://twitter.com/ryersoncue",
+               "facebook_url":"https://www.facebook.com/CentreforUrbanEnergy",
+               "website":"http://www.ryerson.ca/cue",
+               "email":"diane.chong@ryerson.ca",
                "phone":"416-979-5000 x2974"
             }
          },
@@ -364,13 +402,9 @@
             "end_time":"1:00 PM"
          },
          "organizer":{
-            "name":"",
             "contact":{
-               "twitter_handle":"",
-               "facebook_page":"",
                "website":"http://www.speakerscorner.toastmastersclub.org/tm101b/?pg=home",
-               "email":"NATALIYA.KOVTUN@SUNLIFE.COM ",
-               "phone":""
+               "email":"NATALIYA.KOVTUN@SUNLIFE.COM "
             }
          },
          "venue":{
@@ -398,8 +432,9 @@
          "organizer":{
             "name":"CoMotion on King",
             "contact":{
-               "twitter_handle":"comotiononking",
-               "facebook_page":"comotiononking",
+               "twitter_handle":"@comotiononking",
+               "twitter_url":"https://twitter.com/comotiononking",
+               "facebook_url":"https://www.facebook.com/comotiononking",
                "website":"www.comotiononking.com",
                "email":"start@comotiononking.com"
             }
@@ -423,14 +458,15 @@
          "time":{
             "start_date":"02/06/2015",
             "start_time":"12:00 PM",
-            "end_date":"02//06/2015",
+            "end_date":"02/06/2015",
             "end_time":"12:30 PM"
          },
          "organizer":{
             "name":"Swansea Area Seniors Assoication",
             "contact":{
                "twitter_handle":"@SwanseaTownHall",
-               "facebook_page":"Swansea Town Hall",
+               "twitter_url":"https://twitter.com/swanseatownhall",
+               "facebook_url":"https://www.facebook.com/STHSwanseaTownHall",
                "website":"http://www.swanseatownhall.ca/",
                "email":"swanseaareaseniors@gmail.com",
                "phone":"416-392-1953"
@@ -462,7 +498,8 @@
             "name":"Aaron Lundrigan",
             "contact":{
                "twitter_handle":"@Bright_BlueDoor",
-               "facebook_page":"TheBrightBlueDoor",
+               "twitter_url":"https://twitter.com/bright_bluedoor",
+               "facebook_url":"https://www.facebook.com/TheBrightBlueDoor",
                "website":"www.thebrightbluedoor.org",
                "email":"Aaron Lundrigan",
                "phone":"226-808-4468"
@@ -493,11 +530,7 @@
          "organizer":{
             "name":"Dawn Owen",
             "contact":{
-               "twitter_handle":"",
-               "facebook_page":"",
-               "website":"",
-               "email":"info@artgalleryofguelph.ca",
-               "phone":""
+               "email":"info@artgalleryofguelph.ca"
             }
          },
          "venue":{
@@ -526,7 +559,8 @@
             "name":"Active Living Centre",
             "contact":{
                "twitter_handle":"@NYSCentre",
-               "facebook_page":"North York Seniors Centre",
+               "twitter_url":"https://twitter.com/nyscentre",
+               "facebook_url":"https://www.facebook.com/NYSCentre",
                "website":"http://www.nyseniors.org/",
                "email":"ssutus@nyseniors.org",
                "phone":"416-733-4111"
@@ -558,7 +592,8 @@
             "name":"Camp Tech",
             "contact":{
                "twitter_handle":"@CampTechCo",
-               "facebook_page":"Camp Tech",
+               "twitter_url":"https://twitter.com/camptechco",
+               "facebook_url":"https://www.facebook.com/camptechco",
                "website":"http://www.camptech.ca",
                "email":"info@camptech.ca"
             }
@@ -617,7 +652,7 @@
          "organizer":{
             "name":"George Brown College School of ESL",
             "contact":{
-               "facebook_page":"George Brown College School of ESL",
+               "facebook_url":"https://www.facebook.com/GBC.ESL",
                "website":"http://www.georgebrown.ca/esl/ ",
                "email":"esl@georgebrown.ca",
                "phone":"416-415-5000"
@@ -648,7 +683,7 @@
          "organizer":{
             "name":"Centre for Career Action",
             "contact":{
-               "facebook_page":"Centre for Career Action- University of Waterloo (UW)",
+               "facebook_url":"Chttps://www.facebook.com/uWaterlooCentreforCareerAction",
                "website":"https://uwaterloo.ca/career-action/",
                "email":"careers@uwaterloo.ca",
                "phone":"519-888-4047"
@@ -679,9 +714,7 @@
 	"organizer" : {
 		"name" : "Sherri Bulmer",
 		"contact" :{
-			"twitter_handle" : "",
-			"facebook_page" : "",
-			"website" : "http://www.centraleglinton.com/",
+			"website" : "http://www.centraleglinton.com",
 			"email" : "olderadults@centraleglinton.com",
 			"phone" : "416-392-0511"
 			}
@@ -712,7 +745,8 @@
 		"name" : "",
 		"contact" :{
 			"twitter_handle" : "@torontolibrary",
-			"facebook_page" : "Toronto Public Library",
+			"twitter_url":"https://twitter.com/torontolibrary",
+			"facebook_url" : "https://www.facebook.com/torontopubliclibrary",
 			"website" : "http://www.torontopubliclibrary.ca",
 			"phone" : "416-394-5170"
 			}
@@ -743,7 +777,8 @@
 		"name" : "City Dance Corps",
 		"contact" :{
 			"twitter_handle" : "@CityDanceCorps",
-			"facebook_page" : "City Dance Corps",
+			"twitter_url":"https://twitter.com/citydancecorps",
+			"facebook_url" : "https://www.facebook.com/pages/City-Dance-Corps/173484702682629",
 			"website" : "http://www.citydancecorps.com/",
 			"email" : "info@citydancecorps.com",
 			"phone" : "416-260-2356"
@@ -804,7 +839,8 @@
 		"name" : "Appletree Markets Group ",
 		"contact" :{
 			"twitter_handle" : "@AppleTree_TO",
-			"facebook_page" : "AppleTree Markets",
+			"twitter_url":"https://twitter.com/appletree_to",
+			"facebook_url" : "https://www.facebook.com/AppleTreeMarkets",
 			"website" : "http://www.appletreemarkets.ca",
 			"email" : "appletreemarkets@gmail.com ",
 			"phone" : "416-899-1990"
@@ -835,7 +871,8 @@
 		"name" : "Francine Pircio",
 		"contact" :{
 			"twitter_handle" : "@YMCAGTA",
-			"facebook_page" : "YMCA of Greater Toronto",
+			"twitter_url":"https://twitter.com/ymcagta",
+			"facebook_url" : "https://www.facebook.com/YMCAGTA",
 			"website" : "",
 			"email" : "francine_pircio@ymca.ca",
 			"phone" : "905-690-9927"
@@ -865,7 +902,8 @@
 		"name" : "Horseshoe Tavern",
 		"contact" :{
 			"twitter_handle" : "@HorseshoeTavern",
-			"facebook_page" : "Horseshoe Tavern",
+			"twitter_url":"https://twitter.com/horseshoetavern",
+			"facebook_url" : "https://www.facebook.com/HorseshoeTavern",
 			"website" : "www.horseshoetavern.com",
 			"email" : "info@horseshoetavern.com",
 			"phone" : "416-598-2162"
@@ -897,7 +935,8 @@
 		"name" : "The Foundation for the Study of Objective Art",
 		"contact" :{
 			"twitter_handle" : "@GalleryArcturus",
-			"facebook_page" : "Gallery Arcturus",
+			"twitter_url":"https://twitter.com/galleryarcturus",
+			"facebook_url" : "https://www.facebook.com/GalleryArcturus",
 			"website" : "http://www.arcturus.ca/display.php?s=2015-05-02-lost-in-light",
 			"email" : "info@arcturus.ca ",
 			"phone" : "416-977-1077"
@@ -958,7 +997,8 @@
 		"name" : "Club Absinthe",
 		"contact" :{
 			"twitter_handle" : "@ClubAbsinthe",
-			"facebook_page" : "Club Absinthe",
+			"twitter_url":"https://twitter.com/clubabsinthe",
+			"facebook_url" : "https://www.facebook.com/clubabsinthe",
 			"website" : "http://www.clubabsinthe.ca",
 			"email" : "booking@absinthehamilton.ca",
 			"phone" : "905-529-0349"
@@ -989,7 +1029,8 @@
 		"name" : "Mirvish Productions",
 		"contact" :{
 			"twitter_handle" : "@Mirvish",
-			"facebook_page" : "Mirvish Productions",
+			"twitter_url":"https://twitter.com/mirvish",
+			"facebook_url" : "https://www.facebook.com/mirvish",
 			"website" : "http://www.mirvish.com/shows/titanicthemusical",
 			"email" : "info@mirvish.com ",
 			"phone" : "416-872-1212"
@@ -1019,7 +1060,8 @@
 		"name" : "Lower Ossington Theatre",
 		"contact" :{
 			"twitter_handle" : "@LOTheatre",
-			"facebook_page" : "Lower Ossington Theatre",
+			"twitter_url":"https://twitter.com/lotheatre",
+			"facebook_url" : "https://www.facebook.com/lotheatre",
 			"website" : "http://www.lowerossingtontheatre.com",
 			"email" : "office@lowerossingtontheatre.com ",
 			"phone" : "416-915-6747"

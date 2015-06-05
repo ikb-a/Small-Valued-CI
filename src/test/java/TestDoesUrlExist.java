@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.toronto.cs.se.ci.sources.DoesURLExist;
+import edu.toronto.cs.se.ci.sources.SourceFactory;
 
 
 public class TestDoesUrlExist {
@@ -13,7 +14,7 @@ public class TestDoesUrlExist {
 	
 	@Before
 	public void setUp() throws Exception {
-		urlChecker = new DoesURLExist();
+		urlChecker = (DoesURLExist) SourceFactory.getSource(DoesURLExist.class);
 	}
 	
 	@Test

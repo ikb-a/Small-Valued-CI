@@ -5,13 +5,20 @@ import com.google.common.base.Optional;
 import edu.toronto.cs.se.ci.budget.Expenditure;
 import edu.toronto.cs.se.ci.eventObjects.Event;
 import edu.toronto.cs.se.ci.sources.FBProfileLooselyExists;
+import edu.toronto.cs.se.ci.sources.SourceFactory;
 
+/**
+ * Checks that the name of the organizer exists on facebook.
+ * @author wginsberg
+ *
+ */
 public class CheckOrganizerFB extends EventSource {
 
 	protected FBProfileLooselyExists facebook;
 	
 	public CheckOrganizerFB(){
-		facebook = new FBProfileLooselyExists();
+		//facebook = new FBProfileLooselyExists();
+		facebook = (FBProfileLooselyExists) SourceFactory.getSource(FBProfileLooselyExists.class);
 	}
 
 	@Override

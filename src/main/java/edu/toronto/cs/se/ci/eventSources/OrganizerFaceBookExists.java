@@ -5,13 +5,20 @@ import com.google.common.base.Optional;
 import edu.toronto.cs.se.ci.budget.Expenditure;
 import edu.toronto.cs.se.ci.eventObjects.Event;
 import edu.toronto.cs.se.ci.sources.DoesURLExist;
+import edu.toronto.cs.se.ci.sources.SourceFactory;
 
+/**
+ * Checks that the Facebook URL supplied as the organizer's facebook page exists.
+ * @author wginsberg
+ *
+ */
 public class OrganizerFaceBookExists extends EventSource{
 
 	DoesURLExist urlChecker;
 	
 	public OrganizerFaceBookExists() {
-		urlChecker = new DoesURLExist();
+		//urlChecker = new DoesURLExist();
+		urlChecker = (DoesURLExist) SourceFactory.getSource(DoesURLExist.class);
 	}
 	
 	@Override

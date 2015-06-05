@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import edu.toronto.cs.se.ci.eventObjects.Address;
 import edu.toronto.cs.se.ci.eventObjects.Event;
 import edu.toronto.cs.se.ci.sources.NearbySearch;
+import edu.toronto.cs.se.ci.sources.SourceFactory;
 
 import com.google.common.base.Optional;
 
@@ -18,18 +19,17 @@ import edu.toronto.cs.se.ci.playground.sources.GMapsGeocode;
 
 public class GMapsEstablishmentHasAddress extends EventSource {
 
-	static private GMapsGeocode googleMaps;
+	protected GMapsGeocode googleMaps;
 	
 	//this holds the search key, so we won't allow confusion with it being static
-	private NearbySearch nearby;
+	private NearbySearch nearbySearch;
 	
 	public GMapsEstablishmentHasAddress() {
 		
-		if (googleMaps == null){
-			googleMaps = new GMapsGeocode();
-		}
-
-		nearby = new NearbySearch(null);
+		//googleMaps = new GMapsGeocode();
+		googleMaps = (GMapsGeocode) SourceFactory.getSource(GMapsGeocode.class);
+		
+		nearbySearch = new NearbySearch(null);
 	}
 
 	@Override
@@ -103,8 +103,8 @@ public class GMapsEstablishmentHasAddress extends EventSource {
 	public ArrayList<String> placesNearTo(List<Double> coordinates, String searchFor) throws UnknownException{
 		
 		//get the search results
-		nearby.setSearchKey(searchFor);
-		JSONObject nearbyResponse = nearby.getResponse(coordinates);
+		nearbySearch.setSearchKey(searchFor);
+		JSONObject nearbyResponse = nearbySearch.getResponse(coordinates);
 		JSONArray results = nearbyResponse.getJSONArray("results");
 		
 		//get the names
