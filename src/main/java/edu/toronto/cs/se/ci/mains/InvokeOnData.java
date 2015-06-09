@@ -1,7 +1,7 @@
 package edu.toronto.cs.se.ci.mains;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,61 +20,61 @@ import edu.toronto.cs.se.ci.eventSources.TwitterHandleVerified;
 import edu.toronto.cs.se.ci.invokers.EventSourceInvoker;
 import edu.toronto.cs.se.ci.sources.SourceFactory;
 
+
 /**
- * Demo of loading events from a file, invoking sources on
- * them, and saving the results to a file.
+ * Take a .json file of events and invoke sources on it to produce a .arff file
+ * @author wginsberg
+ *
  */
-public class demo {
+public class InvokeOnData {
 
-	static private String fileRealEvents = "./data/event data/chillwall.json";
-	static private String fileFakeEvents = "./data/event data/random english.json";
-	//static private String fileFakeEvents = "./data/event data/fully scrambled chillwall.json";
-	//static private String fileFakeEvents = "./data/event data/gibberish.json";
-
-
-	static private String outFilePath = "./data/chillwall-versus-random-english-1.3.arff";
-	static private String logFilePath = "./log.txt";
+	static private String IN_FILE = "./data/event data/fabricated-plausible-events.json";
+	static private int CLASSIFICATION = 0;
+	static private String OUT_FILE = "./data/fabricated-event-test-plausible.arff";
 	
-	public static void main(String [] args) throws IOException{
+	/**
+	 * 
+	 * @param args [input file, classification, output file]
+	 */
+	public static void main(String[] args) {
+
+		String eventDataFile;
+		int eventClassification;
+		String destinationFile;
 		
-		//load the real events
-		Event [] realEvents;
-		File inFile = new File(fileRealEvents);
-		try{
-			realEvents = Event.loadFromJsonFile(inFile);
+		//organize the paramters
+		if (args.length == 3){
+			eventDataFile = args[0];
+			eventClassification = Integer.getInteger(args[1]);
+			destinationFile = args[2];
 		}
-		catch (Exception e){
+		else{
+			eventDataFile = IN_FILE;
+			eventClassification = CLASSIFICATION;
+			destinationFile = OUT_FILE;
+		}
+		
+		//load the events
+		Event [] events;
+		try {
+			events = Event.loadFromJsonFile(new File(eventDataFile));
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return;
 		}
 		
-		//load the fake events
-		Event [] fakeEvents;
-		inFile = new File(fileFakeEvents);
-		try{
-			fakeEvents = Event.loadFromJsonFile(inFile);
-		}
-		catch (Exception e){
-			e.printStackTrace();
-			return;
-		}
-				
 		//create the sources
 		ArrayList<EventSource> sources = new ArrayList<EventSource>();
 		//classify the events with a classifying source
-		ClassifyingSource c = new ClassifyingSource("real event");
-		for (int i = 0; i < realEvents.length; i++){
-			c.classify(realEvents[i], 1);
-		}
-		for (int i = 0; i < fakeEvents.length; i++){
-			c.classify(fakeEvents[i], 0);
+		ClassifyingSource c = new ClassifyingSource("class (real event)");
+		for (int i = 0; i < events.length; i++){
+			c.classify(events[i], eventClassification);
 		}
 		
 		//add all the sources
 		sources.add(c);
 		sources.add((GoogleMapsVenueAddress)SourceFactory.getSource(GoogleMapsVenueAddress.class));
 		sources.add((CheckOrganizerFB)SourceFactory.getSource(CheckOrganizerFB.class));
-		//sources.add((CheckOrganizerFBExact)SourceFactory.getSource(CheckOrganizerFBExact.class));
 		sources.add((OrganizerWebSiteExists)SourceFactory.getSource(OrganizerWebSiteExists.class));
 		//the URL they supplied, not a search for their name on facebook
 		sources.add((OrganizerFaceBookExists)SourceFactory.getSource(OrganizerFaceBookExists.class));
@@ -84,23 +84,14 @@ public class demo {
 		sources.add((TitleMatchesDescription)SourceFactory.getSource(TitleMatchesDescription.class));
 		sources.add((TimeIsInPlausibleRange)SourceFactory.getSource(TimeIsInPlausibleRange.class));
 
-		
-		//let's have the log printed to a log.txt file
-		FileWriter logWriter = new FileWriter(logFilePath);
-		logWriter.write("demo.java\n\n");
-		EventSource.setLogWriter(logWriter);
-		
-		//get a single list of events to invoke on
-		ArrayList<Event> events = new ArrayList<Event>();
-		for (int i = 0; i < realEvents.length; i++){
-			events.add(realEvents[i]);
-		}
-		for (int i = 0; i < fakeEvents.length; i++){
-			events.add(fakeEvents[i]);
+		//this is messy and it should get fixed
+		ArrayList<Event> eventList = new ArrayList<Event> (events.length);
+		for (int i = 0; i< events.length; i++){
+			eventList.add(events[i]);
 		}
 		
 		//invoke the sources
-		EventSourceInvoker invoker = new EventSourceInvoker("Event Plausibility", sources, events);
+		EventSourceInvoker invoker = new EventSourceInvoker("Event Plausibility", sources, eventList);
 		System.out.println("invoking sources ...\n");
 		invoker.invoke();
 		
@@ -111,16 +102,16 @@ public class demo {
 		
 		//save to a file
 		try{
-			File outFile = new File(outFilePath);
-			String outFileComment = String.format("Real events : %s\nFake events : %s", fileRealEvents, fileFakeEvents);
+			File outFile = new File(OUT_FILE);
+			String outFileComment = String.format("Event data : %s", IN_FILE);
 			invoker.saveToArff(outFile, outFileComment);
-			System.out.printf("Saved results to %s\n", outFilePath);
+			System.out.printf("\nSaved results to %s\n", destinationFile);
 		}
 		catch (IOException ex){
-			System.out.println("Couldn't open the out file. Dumping to stdout instead:");
+			System.out.println("\nCouldn't open the out file. Dumping to stdout instead:");
 			System.out.println(invoker.getFormattedResults());
 		}
-		
 	}
+
 	
 }

@@ -1,7 +1,6 @@
 package edu.toronto.cs.se.ci.mains;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -9,20 +8,20 @@ import com.google.gson.*;
 
 import edu.toronto.cs.se.ci.eventObjects.Event;
 import edu.toronto.cs.se.ci.random.EventObjectRandomizer;
-import edu.toronto.cs.se.ci.random.MutatedEventGenerator;
+import edu.toronto.cs.se.ci.random.GibberishEventGenerator;
 
 public class GenerateRandomEvents {
 
 	public static void main(String[] args) throws IOException {
 		
-		int numEvents = 35;
+		int numEvents = 50;
 		String destination = "./data/event data/random2.json";
 		
 		//generate the events
 		Event [] events = new Event [numEvents];
-		//EventObjectRandomizer randomizer = new EventObjectRandomizer(new GibberishEventGenerator());
+		EventObjectRandomizer randomizer = new EventObjectRandomizer(new GibberishEventGenerator());
 		//EventObjectRandomizer randomizer = new EventObjectRandomizer(new EnglishEventGenerator());
-		EventObjectRandomizer randomizer = new EventObjectRandomizer(new MutatedEventGenerator(new File ("./data/event data/chillwall.json") ));
+		//EventObjectRandomizer randomizer = new EventObjectRandomizer(new MutatedEventGenerator(new File ("./data/event data/chillwall.json") ));
 		for (int i = 0; i < numEvents; i++){
 			events[i] = randomizer.event();
 		}
